@@ -1,52 +1,24 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: Text('Parity App')),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
+class Calculator extends StatefulWidget {
   final Widget? title;
-  const MyHomePage({super.key, this.title});
+  const Calculator({super.key, this.title});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Calculator> createState() => _CalculatorState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _CalculatorState extends State<Calculator> {
   final myFocusNode = FocusNode();
-  final TextEditingController _controller = TextEditingController();
-  String valueStatus = '';
-
-  String getStatus(String input) {
-    final number = int.tryParse(input);
-    if (number == null) return 'Wrong Input';
-    return number.isEven ? 'Is Even' : 'Is Odd';
-  }
-
-  void checkStatus() {
-    final text = _controller.text.trim();
-    myFocusNode.unfocus();
-    if (text.isEmpty) return;
+  final TextEditingController _vcontroller = TextEditingController();
+  int answer = 0;
+  void solve() {
+    final text = _vcontroller.text;
+    final number = int.tryParse(text);
     setState(() {
-      valueStatus = getStatus(text);
+      answer = number! * number;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextField(
-                  controller: _controller,
+                  controller: _vcontroller,
                   focusNode: myFocusNode,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -80,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           borderRadius: BorderRadiusGeometry.circular(5),
                         ),
                       ),
-                      onPressed: checkStatus,
+                      onPressed: solve,
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text('Submit'),
@@ -88,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      valueStatus,
+                      answer.toString(),
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
