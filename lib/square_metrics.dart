@@ -14,10 +14,18 @@ class _SquareMetricsState extends State<SquareMetrics> {
   final TextEditingController _controller = TextEditingController();
   String valueStatus = '';
 
-  String getStatus(String input) {
-    final number = int.tryParse(input);
+  int? parseInt(String input) => int.tryParse(input);
+
+  String getArea(String input) {
+    final number = parseInt(input);
     if (number == null) return 'Wrong Input';
-    return number.isEven ? 'Is Even' : 'Is Odd';
+    return (number * number).toString();
+  }
+
+  String getPerimeter(String input) {
+    final number = parseInt(input);
+    if(number == null) return 'Wrong Input';
+    return (number * 4).toString();
   }
 
   void checkStatus() {
@@ -25,7 +33,7 @@ class _SquareMetricsState extends State<SquareMetrics> {
     myFocusNode.unfocus();
     if (text.isEmpty) return;
     setState(() {
-      valueStatus = getStatus(text);
+      valueStatus = 'Area = ${getArea(text)}, Perimeter = ${getPerimeter(text)}';
     });
   }
 
