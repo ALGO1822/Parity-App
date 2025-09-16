@@ -51,6 +51,26 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: widget.title),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Colors.purple.withValues(alpha: 0.5)),
+              child: Row(
+                children: [
+                  Icon(Icons.build),
+                  Text('Tools', style: TextStyle(color: Colors.purple, fontSize: 25)),
+                ],
+              ),
+            ),
+            ListTile(
+              title: const Text('Square metrics'),
+              onTap: () {},
+            ),
+          ],
+        ),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
