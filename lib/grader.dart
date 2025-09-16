@@ -1,41 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/grader.dart';
 import 'package:practice_app/main.dart';
+import 'package:practice_app/square_metrics.dart';
 
-class SquareMetrics extends StatefulWidget {
+class GradeChecker extends StatefulWidget {
   final Widget? title;
-  const SquareMetrics({super.key, this.title});
+  const GradeChecker({super.key, this.title});
 
   @override
-  State<SquareMetrics> createState() => _SquareMetricsState();
+  State<GradeChecker> createState() => _GradeCheckerState();
 }
 
-class _SquareMetricsState extends State<SquareMetrics> {
+class _GradeCheckerState extends State<GradeChecker> {
   final myFocusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
   String valueStatus = '';
 
   int? parseInt(String input) => int.tryParse(input);
 
-  String getArea(String input) {
+  String getScore(String input) {
+    if (input.isEmpty) return 'Input something';
     final number = parseInt(input);
-    if (number == null) return 'Wrong Input';
-    return (number * number).toString();
-  }
-
-  String getPerimeter(String input) {
-    final number = parseInt(input);
-    if (number == null) return 'Wrong Input';
-    return (number * 4).toString();
+    if (number == null) return 'Invalid Input';
+    final score = number ~/ 10;
+    switch (score) {
+      case 10:
+      case 9:
+        return 'A';
+      case 8:
+        return 'B';
+      case 7:
+        return 'C';
+      case 6:
+        return 'D';
+      case 5:
+        return 'E';
+      default:
+        return 'F';
+    }
   }
 
   void checkStatus() {
     final text = _controller.text.trim();
     myFocusNode.unfocus();
-    if (text.isEmpty) return;
     setState(() {
-      valueStatus =
-          'Area = ${getArea(text)}, Perimeter = ${getPerimeter(text)}';
+      valueStatus = getScore(text);
     });
   }
 
@@ -131,7 +139,7 @@ class _SquareMetricsState extends State<SquareMetrics> {
                             child: Padding(
                               padding: const EdgeInsets.all(5.0),
                               child: Icon(
-                                Icons.grading,
+                                Icons.square_foot_outlined,
                                 size: 30,
                                 color: Colors.white,
                               ),
@@ -140,7 +148,7 @@ class _SquareMetricsState extends State<SquareMetrics> {
                         ),
                         SizedBox(width: 10),
                         Text(
-                          'Grade Checker',
+                          'Square metrics',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.deepPurple,
@@ -160,7 +168,7 @@ class _SquareMetricsState extends State<SquareMetrics> {
                         context,
                         MaterialPageRoute(
                           builder: (_) =>
-                              GradeChecker(title: Text('Grade Checker')),
+                              SquareMetrics(title: Text('Square Matrics')),
                         ),
                       );
                     },
@@ -209,7 +217,21 @@ class _SquareMetricsState extends State<SquareMetrics> {
                     SizedBox(width: 10),
                     Text(
                       valueStatus,
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: valueStatus == 'A'
+                            ? Colors.lightGreen
+                            : valueStatus == 'B'
+                            ? Colors.lightBlue
+                            : valueStatus == 'C'
+                            ? Colors.amber
+                            : valueStatus == 'D'
+                            ? Colors.brown
+                            : valueStatus == 'Input something'
+                            ? Colors.grey
+                            : Colors.red,
+                      ),
                     ),
                   ],
                 ),

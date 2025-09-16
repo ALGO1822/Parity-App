@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:practice_app/grader.dart';
 import 'package:practice_app/square_metrics.dart';
 
 void main() {
@@ -74,45 +75,108 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: ListTile(
-                focusColor: Colors.deepPurple,
-                hoverColor: Colors.purpleAccent.withValues(alpha: .04),
-                tileColor: Colors.purpleAccent.withValues(alpha: 0.2),
-                title: Row(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.purple,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Icon(
-                            Icons.square_foot_outlined,
-                            size: 30,
-                            color: Colors.white,
+              child: Column(
+                children: [
+                  ListTile(
+                    focusColor: Colors.deepPurple,
+                    hoverColor: Colors.purpleAccent.withValues(alpha: .04),
+                    tileColor: Colors.purpleAccent.withValues(alpha: 0.2),
+                    title: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Icon(
+                                Icons.square_foot_outlined,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Square metrics',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(7),
+                      side: BorderSide(
+                        color: Colors.purple.withValues(alpha: 0.4),
+                        width: 2.0,
                       ),
                     ),
-                    SizedBox(width: 10),
-                    Text(
-                      'Square metrics',
-                      style: TextStyle(fontSize: 18, color: Colors.deepPurple),
-                    ),
-                  ],
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadiusGeometry.circular(7),
-                  side: BorderSide(
-                    color: Colors.purple.withValues(alpha: 0.4),
-                    width: 2.0,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              SquareMetrics(title: Text('Square Matrics')),
+                        ),
+                      );
+                    },
                   ),
-                ),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => SquareMetrics(title: Text('Square Matrics'),)));
-                },
+                  SizedBox(height: 10),
+                  ListTile(
+                    focusColor: Colors.deepPurple,
+                    hoverColor: Colors.purpleAccent.withValues(alpha: .04),
+                    tileColor: Colors.purpleAccent.withValues(alpha: 0.2),
+                    title: Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.purple,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Icon(
+                                Icons.grading,
+                                size: 30,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Text(
+                          'Grade Checker',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.deepPurple,
+                          ),
+                        ),
+                      ],
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadiusGeometry.circular(7),
+                      side: BorderSide(
+                        color: Colors.purple.withValues(alpha: 0.4),
+                        width: 2.0,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              GradeChecker(title: Text('Grade Checker')),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ],
