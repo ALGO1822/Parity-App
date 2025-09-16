@@ -1,34 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:practice_app/square_metrics.dart';
+import 'package:practice_app/main.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: Text('Parity App')),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
+class SquareMetrics extends StatefulWidget {
   final Widget? title;
-  const MyHomePage({super.key, this.title});
+  const SquareMetrics({super.key, this.title});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SquareMetrics> createState() => _SquareMetricsState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SquareMetricsState extends State<SquareMetrics> {
   final myFocusNode = FocusNode();
   final TextEditingController _controller = TextEditingController();
   String valueStatus = '';
@@ -89,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: Icon(
-                            Icons.square_foot_outlined,
+                            Icons.compare_arrows,
                             size: 30,
                             color: Colors.white,
                           ),
@@ -98,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     SizedBox(width: 10),
                     Text(
-                      'Square metrics',
+                      'Parity app',
                       style: TextStyle(fontSize: 18, color: Colors.deepPurple),
                     ),
                   ],
@@ -111,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) => SquareMetrics(title: Text('Square Matrics'),)));
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => MyHomePage(title: Text('Parity App'),)));
                 },
               ),
             ),
